@@ -108,6 +108,32 @@ router.delete('/inventory/delete/:id',fetchItem,async(req,res)=>{
     }
 
 })
+
+router.get('/inventory/search',fetchItem,async (req,res)=>{
+    try {
+        const{name,minPrice,maxPrice,tag}=req.query;
+
+        const query={};
+        if(name){
+            query.name={$regex:name,$options:'i'};
+        }
+        if(minPrice){
+            query.price={$gte:minPrice};
+        }
+        if(maxPrice){
+            query.price={...query.price,$lte:maxPrice};
+        }
+        if(tag){
+            query.tag=tag;
+        }
+
+        const inventoryItem=await Inventory.find(query);
+        res.status(200).json(inventoryItem)
+    } catch (error) {
+        res.status(500).json({error:error});
+    }
+})
+
 //api to add the inventory 
 //api to update the inventory
 //api to delete the inventory
