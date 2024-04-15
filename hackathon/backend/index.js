@@ -18,6 +18,8 @@ app.put('/inventory/update/:id',require('./routes/store'));
 app.delete('/inventory/delete/:id',require('./routes/store'));
 app.get('/inventory/getinventory',require('./routes/store'));
 app.get('/inventory/search',require('./routes/store'));
+app.get('/inventory',require('./routes/store'));
+app.get('/inventory/analytics',require('./routes/store'));
 
 app.listen(port,()=>{
     console.log(`Example app listening on port ${port}`)

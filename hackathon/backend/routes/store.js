@@ -109,6 +109,7 @@ router.delete('/inventory/delete/:id',fetchItem,async(req,res)=>{
 
 })
 
+//for seaching the item
 router.get('/inventory/search',fetchItem,async (req,res)=>{
     try {
         const{name,minPrice,maxPrice,tag}=req.query;
@@ -133,6 +134,67 @@ router.get('/inventory/search',fetchItem,async (req,res)=>{
         res.status(500).json({error:error});
     }
 })
+
+// adding pagination
+router.get('/inventory',fetchItem,async(req,res)=>{
+
+    try {
+        
+        const page=parseInt(req.query.page,10)||1;
+        const limit=parseInt(req.query.limit,10)||10;
+        const offset=(page-1)*limit;
+    
+        const inventory=await Inventory.find()
+        .skip(offset)
+        .limit(limit)
+        .exec();
+        
+        if(!inventory){
+            res.status(404).send("Iventory not found");
+        }
+
+        const totalCount=await Inventory.countDocuments();
+    
+        const totalPages=Math.ceil(totalCount/limit);
+    
+        res.status(200).json({
+            currentPage:page,
+            pageSize:limit,
+            totalPages:totalPages,
+            totalCount:totalCount,
+            data:inventory
+        })
+    } catch (error) {
+        res.status(500).json({error:error});
+    }
+})
+
+//adding a accounting system:
+router.get('/inventory/analytics',fetchItem,async(req,res)=>{
+    try {
+        const countingNoOfItems=await Inventory.countDocuments();
+        const totalPrices=await Inventory.aggregate([
+            {
+                $group:{
+                    _id:null,
+                    total:{$sum:"$price"},
+                    average:{$avg:"$price"}
+                }
+            }
+        ]);
+
+        const analyticsReport={
+            count:countingNoOfItems,
+            totalPrice:totalPrices.length>0?totalPrices[0].total:0,
+            averagePrice:totalPrices.length>0?totalPrices[0].average:0
+        } 
+
+        res.status(200).json(analyticsReport);
+    } catch (error) {
+        res.status(500).json({error:error});
+    }
+})
+
 
 //api to add the inventory 
 //api to update the inventory
