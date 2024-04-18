@@ -13,6 +13,9 @@ app.get('/',(req,res)=>{
 app.post('/seller/signup',require('./routes/auth'));
 app.post('/seller/login',require('./routes/auth'));
 app.post('/seller/getseller',require('./routes/auth'));
+app.put('/seller/getseller',require('./routes/auth'));
+app.delete('/seller/getseller',require('./routes/auth'));
+
 app.post('/inventory/add',require('./routes/store'))
 app.put('/inventory/update/:id',require('./routes/store'));
 app.delete('/inventory/delete/:id',require('./routes/store'));
@@ -20,6 +23,10 @@ app.get('/inventory/getinventory',require('./routes/store'));
 app.get('/inventory/search',require('./routes/store'));
 app.get('/inventory',require('./routes/store'));
 app.get('/inventory/analytics',require('./routes/store'));
+
+app.get('/transaction/history',require('./routes/transaction'));
+app.post('/transaction/add',require('./routes/transaction'));
+app.put('/transaction/update/:id',require('./routes/transaction'));
 
 app.listen(port,()=>{
     console.log(`Example app listening on port ${port}`)

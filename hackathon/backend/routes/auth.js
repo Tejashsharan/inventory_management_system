@@ -97,6 +97,51 @@ router.post('/seller/getseller',fetchItem,async(req,res)=>{
     }
 })
 
+//make put and delete request for the /seller/getseller
+
+router.put('/seller/getseller', fetchItem, async (req, res) => {
+    try {
+        const { name, email, password } = req.body;
+        const item = {};
+
+        if (name) {
+            item.name = name;
+        }
+        if (email) {
+            item.email = email;
+        }
+        if (password) {
+            const salt=await bcrypt.genSalt(10);
+            const secPass=await bcrypt.hash(password,salt);
+            item.password = secPass;
+        }
+
+        const updatedSeller = await Seller.findByIdAndUpdate(req.seller.id, item, { new: true });
+
+        if (!updatedSeller) {
+            return res.status(404).json({ error: "User not found" });
+        }
+
+        res.status(200).json(updatedSeller);
+    } catch (error) {
+        res.status(500).json({ error: error });
+    }
+});
+
+router.delete('/seller/getseller',fetchItem,async(req,res)=>{
+
+    try {
+        const deleteSeller=await Seller.findByIdAndDelete(req.seller.id);
+        if(!deleteSeller){
+            res.status(404).send("user not found")
+        }
+        res.status(200).json(deleteSeller);
+    } catch (error) {
+        res.status(500).json({error:error});
+    }
+
+})
+
 module.exports=router;
 
 

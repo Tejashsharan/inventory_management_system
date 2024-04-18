@@ -5,6 +5,7 @@ const router=express.Router();
 const{body,validationResult}=require('express-validator');
 const fetchItem=require('../middleware/fetchItem');
 const Seller = require('../modules/Seller');
+const upload=require('../middleware/multer');
 
 router.get('/inventory/getinventory', fetchItem, async (req, res) => {
     try {
@@ -54,7 +55,7 @@ router.post('/inventory/add',fetchItem,[
 })
 
 //for updating an inventory
-router.put('/inventory/update/:id',fetchItem,[
+router.put('/inventory/update/:id',upload.single('image'),fetchItem,[
     body("name","min length of the name is 3").isLength({min:3}),
     body("quantity","cant left this field empty").exists(),
     body("price","cant left this field empty").exists(),
@@ -69,12 +70,17 @@ router.put('/inventory/update/:id',fetchItem,[
     try {
         const productId=req.params.id;
 
-        const {name,quantity,price,itemcode,tag,image}=req.body;
+        const {name,quantity,price,itemcode,tag}=req.body;
+
+        let image;
+        if(req.file){
+            image=req.file.path
+        }
 
         const updateProduct=await Inventory.findByIdAndUpdate(productId,{
             name:name,
             price:price,
-            image:image,
+            image:image || req.body.image,
             itemcode:itemcode,
             tag:tag,
             quantity:quantity
@@ -196,7 +202,4 @@ router.get('/inventory/analytics',fetchItem,async(req,res)=>{
 })
 
 
-//api to add the inventory 
-//api to update the inventory
-//api to delete the inventory
 module.exports=router;
