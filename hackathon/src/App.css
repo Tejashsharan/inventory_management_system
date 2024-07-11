@@ -1,0 +1,533 @@
+
+body {
+    font-family: "Roboto", sans-serif;
+    color: white;
+}
+
+nav {
+    width: 100%;
+    height: 75px;
+    display: flex;
+    background-color: rgb(56, 95, 177);
+    font-family: "Bebas Neue";
+    font-size: larger;
+    position: fixed;
+    z-index: 1;
+}
+
+.logo {
+    display: flex;
+    width: 50%;
+}
+
+.menu {
+    width: 50%;
+}
+
+.menu ul {
+    display: flex;
+    list-style: none;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 100%;
+    height: 75px;
+    cursor: pointer;
+}
+
+.clickedMenu ul {
+    display: none;
+}
+
+.firstLook{
+    display: flex;
+}
+
+.heading{
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    margin: 125px 10px 10px 10px;
+}
+
+.heading p{
+    margin: 0 10px 10px 10px;
+}
+/* here is where the animation of the heading is starting */
+
+.wrapper{
+    color: black;
+}
+.wrapper .static-txt{
+    font-size: 30px;
+}
+.wrapper ul{
+    list-style: none;
+    font-size: 30px;
+    font-weight: 500;
+    color: green;
+    height: 90px;
+    overflow: hidden;
+}
+.wrapper li{
+    position: relative;
+    height: 90px;
+    top: 0;
+    animation: slide 8s steps(4) infinite;
+}
+@keyframes slide {
+    100%{top: -360px;}
+}
+.dynamic-txt li span{
+    position: relative;
+}
+.dynamic-txt li span::after{
+    content: "";
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    left: 0;
+    margin-top: 5px;
+    background:rgb(255, 255, 255);
+    border-left: 5px solid green;
+    animation: typing 2s steps(12) infinite;
+}
+@keyframes typing {
+    0% { left: 0; }
+    50%{
+        left: 100%;
+        margin: 5px -35px 0 15px;
+    }
+    90%{
+        opacity: 1;
+    }
+    100%{
+        opacity: 0;
+        left: 100%;
+        margin: 5px -35px 0 15px;
+    }
+}
+
+/* here is where the animation is ending for the heading tag */
+
+.image_1{
+    transform: rotate(0deg);
+    animation: image1 40s infinite;
+}
+@keyframes image1 {
+    0%,24%{
+        transform: rotate(0deg);
+        scale: 1.15;
+    }
+    25%,49%{
+        transform: rotate(-90deg);
+        scale: 0.5;
+        visibility: hidden;
+    }
+    50%,74%{
+        transform: rotate(-180deg);
+        scale: 0.5;
+        visibility: hidden;
+    }
+    75%,99%{
+        transform: rotate(-270deg);
+        scale: 0.5;
+        visibility: hidden;
+    }
+    100%{
+        transform: rotate(-360deg);
+        scale: 1.15;
+    }
+}
+
+.image_2{
+    transform: rotate(0deg);
+    animation: image2 40s infinite;
+}
+@keyframes image2 {
+    0%,24%{
+        transform: rotate(0deg);
+        scale: 0.5;
+        visibility: hidden;
+    }
+    25%,49%{
+        transform: rotate(-90deg);
+        scale: 0.5;
+        visibility: hidden;
+    }
+    50%,74%{
+        transform: rotate(-180deg);
+        scale: 0.5;
+        visibility: hidden;
+    }
+    75%,99%{
+        transform: rotate(-270deg);
+        scale: 1.75;
+        visibility: visible;
+    }
+    100%{
+        transform: rotate(-360deg);
+        scale: 0.5;
+        visibility: hidden;
+    }
+}
+
+.image_3{
+    transform: rotate(0deg);
+    animation: image3 40s infinite;
+}
+@keyframes image3 {
+    0%,24%{
+        transform: rotate(0deg);
+        scale: 0.5;
+        visibility: hidden;
+    }
+    25%,49%{
+        transform: rotate(-90deg);
+        scale: 0.5;
+        visibility: hidden;
+    }
+    50%,74%{
+        transform: rotate(-180deg);
+        scale: 1.5;
+        visibility: visible;
+    }
+    75%,99%{
+        transform: rotate(-270deg);
+        scale: 0.5;
+        visibility: hidden;
+    }
+    100%{
+        transform: rotate(-360deg);
+        scale: 0.5;
+        visibility: hidden;
+    }
+}
+
+.image_4{
+    transform: rotate(0deg);
+    animation: image4 40s infinite;
+}
+@keyframes image4 {
+    0%,24%{
+        transform: rotate(0deg);
+        scale: 0.5;
+        visibility: hidden;
+    }
+    25%,49%{
+        transform: rotate(-90deg);
+        scale: 1.15;
+        visibility: visible;
+    }
+    50%,74%{
+        transform: rotate(-180deg);
+        scale: 0.5;
+        visibility: hidden;
+    }
+    75%,99%{
+        transform: rotate(-270deg);
+        scale: 0.5;
+        visibility: hidden;
+    }
+    100%{
+        transform: rotate(-360deg);
+        scale: 0.5;
+        visibility: hidden;
+    }
+}
+
+.animated_images{
+    width: 50%;
+    overflow: hidden;
+    padding: 200px;
+}
+
+.image{
+    height: 550px;
+    width: 550px;
+    border-radius: 50%;
+    border: 5px solid green;
+    position: relative;
+    transform:rotate(0deg);
+    animation: rotate 40s infinite;
+}
+@keyframes rotate {
+    0%,24%{
+        transform: rotate(0deg);
+    }
+    25%,49%{
+        transform: rotate(90deg);
+    }
+    50%,74%{
+        transform: rotate(180deg);
+    }
+    75%,99%{
+        transform: rotate(270deg);
+    }
+    100%{
+        transform: rotate(360deg);
+    }
+}
+
+.image img{
+    width: 200px;
+    height: 200px;
+}
+
+.secondLook{
+    display: flex;
+    font-size: 16px;
+}
+
+.secondLook .animation{
+    width: 50%;
+}
+
+.secondLook .text{
+    width: 50%;
+    color: black;
+    
+}
+
+
+.text .movingText h3 ,.text .movingText p{
+    transform: translateX(-300px);
+    transform: translateY(0px);
+    animation: slide1 10s infinite;
+}@keyframes slide1{
+    0%{transform: translateX(-300px);}
+    10%{transform: translateX(0);}
+    20%,60%,80%{transform: translateY(5px);}
+    40%,70%,90%{transform: translateY(-5px);}
+    100%{transform: translateX(0);
+    transform:translateY(0)}
+}
+
+
+.movingText {
+    height: 300px;
+    overflow: hidden;
+    margin: 350px 10px 10px 10px;
+}
+.movingText li{
+    position: relative;
+    top: 0;
+    height: 300px;
+    animation: move 40s infinite steps(4);
+}
+@keyframes move {
+    100%{
+        top: -1200px;
+    }
+}
+
+.thirdLook{
+    height: auto;
+    width: 100%;
+    color: black;
+    margin: 10px;
+}
+.thirdLook div{
+    font-size: 16px;
+    margin: 20px;
+    padding: 10px;
+    /* border: 2px solid black; */
+    border-radius: 12px;
+    /* background-color: rgb(56, 95, 177); */
+}
+.thirdLook h3{
+    color: green;
+}
+.thirdLook div div{
+    display: flex;
+}
+
+.fourthLook{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    color: black;
+    margin-top: 50px;
+}
+
+.flexi{
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: space-around;
+}
+
+.fourthLook div div{
+    width: 400px;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border: 2px solid green;
+    border-radius: 12px;
+    margin: 100px 10px 10px 10px;
+    padding: 10px;
+    font-size: 14px;
+    transition: all 1s;
+}
+
+.fourthLook div div:hover {
+    background-color: rgba(144, 238, 144, 0.473);
+    scale: 1.1;
+}
+
+.fourthLook div p{
+    margin-top: 50px;
+}
+.fourthLook h2{
+    font-size: 30px;
+    font-weight: 600;
+}
+
+.thirdLook {
+    transition: opacity 1s ease-out, filter 1s ease-out, transform 1s ease-out;
+  }
+  
+  .hidden {
+    opacity: 0;
+    filter: blur(5px);
+    transform: translateX(-100%);
+  }
+  
+  .show {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateX(0);
+  }
+
+  .khatam{
+    width: 100%;
+    height: 75px;
+    color: white;
+    background-color: rgb(56, 95, 177);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 50px;
+    font-size: 20px;
+  }
+  .khatam img{
+    height: 50px;
+    width: 50px;
+    margin: 0 10px 0 10px;
+  }
+  .khatam .name{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40%;
+    border-right: 2px solid black;
+  }
+  .khatam .insta{
+    display: flex;
+width: 20%;
+    /* justify-content: space-around; */
+}
+
+    .khatam p{
+        margin-top: 15px;
+    }
+
+
+    .signup{
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-image: url("https://wallpapercave.com/wp/wp2059232.jpg");
+        
+    }
+    .signup label{
+        margin: 10px;
+    }
+    .signup input{
+        height: 40px;
+        width: 250px;
+        border-radius: 12px;
+    }
+    .signup form{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border: 2px solid rgb(56, 95, 177);
+        color: white;
+        width: 275px;
+        padding: 20px;
+        border-radius: 12px;
+        background-color: rgba(0, 128, 0, 0.405);
+    }
+
+
+@media only screen and (max-width: 900px) {
+
+    .bar1,
+    .bar2,
+    .bar3 {
+        width: 35px;
+        height: 5px;
+        background-color: white;
+        margin: 6px;
+        transition: 0.4s;
+    }
+
+    .change .bar1 {
+        transform: translate(0, 11px) rotate(-45deg);
+    }
+
+    .change .bar2 {
+        opacity: 0;
+    }
+
+    .change .bar3 {
+        transform: translate(0, -11px) rotate(45deg);
+    }
+
+    .menu ul {
+        display: none;
+    }
+
+    .clickedMenu ul {
+        display: block;
+        width: 200px;
+        height: auto;
+        background-color: rgb(40, 175, 40);
+        border-radius: 12px;
+        padding: 10px; 
+        margin: 60px 0 0 0;
+        transform: translateY(-200px);
+        opacity: 0;
+        animation: menuAnimation 0.5s ease-in forwards;
+        cursor: pointer;
+    }
+
+    @keyframes menuAnimation {
+        0% {
+            transform: translateY(-200px);
+            opacity: 0;
+        }
+        100% {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
+
+    .clickedMenu li {
+        width: 180px;
+        height: auto;
+        padding: 10px;
+        margin: 10px 0;
+        border: 1px solid black;
+        border-radius: 8px;
+        background-color: rgba(255, 255, 255, 0.1);
+    }
+}

@@ -16,15 +16,17 @@ router.post('/seller/signup',[
 
     //check if the validation conditions are satisfied
     const result=validationResult(req);
+    let success=false;
     if(!result.isEmpty()){
-        res.status(400).json({error:error.array()});
+        return res.status(400).json({error:error.array()});
     }
 
     //check if the user exists 
     try {
         const seller=await Seller.findOne({email:req.body.email})
         if(seller){
-            res.status(400).json({error:"A email with this userid exists."});
+            return res.status(400).json({error:"A email with this user_id exists."});
+            // success=false;
         }
 
         //saving data to the database
@@ -37,54 +39,63 @@ router.post('/seller/signup',[
             password:secPass
         })
 
-        res.status(201).json({message:"user created successfully",user:newSeller})
-
-    } catch (error) {
-        res.status(500).json({error:error});
-    }
-
-})
-
-// login
-router.post('/seller/login',[
-    body("email","Enter a valid email").isEmail(),
-    body("password","Enter a valid password").exists()
-],async(req,res)=>{
-
-    //see if all the validation conditions are satisfied or not
-    const result=validationResult(req);
-    if(!result.isEmpty()){
-        res.status(400).json({error:error.array()});
-    }
-
-    //checking if the user exists
-    const {email,password}=req.body;
-    try {
-        
-        const seller=await Seller.findOne({email});
-        if(!seller){
-            res.status(401).json({error:"invalid credentials"});
-        }
-    
-        //checking password
-        const checkPass=await bcrypt.compare(password,seller.password);
-        if(!checkPass){
-            res.status(401).json({error:"invalid credentials"});
-        }
-    
-        //generating auth token
         const data={
             seller:{
-                id:seller.id
+                id:newSeller.id
             }
         }
         const authToken=jwt.sign(data,jwt_secret)
-        res.status(201).json({authtoken:authToken})
+
+        success=true;
+        return res.status(201).json({success,authtoken:authToken});
     } catch (error) {
-        res.status(500).json({error:error});   
+        return res.status(500).json({error:error.message});
     }
 
 })
+
+// Login
+router.post('/seller/login', [
+    body("email", "Enter a valid email").isEmail(),
+    body("password", "Enter a valid password").exists()
+], async (req, res) => {
+
+    // See if all the validation conditions are satisfied or not
+    const result = validationResult(req);
+    let success = false;
+    if (!result.isEmpty()) {
+        return res.status(400).json({ error: result.array() });
+    }
+
+    // Checking if the user exists
+    const { email, password } = req.body;
+    try {
+        const seller = await Seller.findOne({ email });
+        if (!seller) {
+            return res.status(401).json({ error: "invalid credentials" });
+        }
+
+        // Checking password
+        const checkPass = await bcrypt.compare(password, seller.password);
+        if (!checkPass) {
+            return res.status(401).json({ error: "invalid credentials" });
+        }
+
+        // Generating auth token
+        const data = {
+            seller: {
+                id: seller.id
+            }
+        };
+        const authToken = jwt.sign(data, jwt_secret);
+        success = true;
+        return res.status(201).json({ authtoken: authToken, success });
+    } catch (error) {
+        return res.status(500).json({ error: error.message });
+    }
+
+});
+
 
 router.post('/seller/getseller',fetchItem,async(req,res)=>{
     try {

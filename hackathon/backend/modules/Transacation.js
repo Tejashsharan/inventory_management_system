@@ -4,7 +4,7 @@ const {Schema}=mongoose;
 const transactionShcema=new Schema({
     seller: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'seller'
+        ref: 'Seller'
       },
     type:String,
     products:[{

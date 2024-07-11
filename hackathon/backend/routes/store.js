@@ -21,26 +21,28 @@ router.get('/inventory/getinventory', fetchItem, async (req, res) => {
         }
 
         // Return the found inventory items
-        res.status(200).json(inventory);
+        return res.status(200).json(inventory);
     } catch (error) {
         console.error(error.message);
-        res.status(500).json({ error: "Internal server error" });
+        return res.status(500).json({ error: "Internal server error" });
     }
 });
 
 
 //for adding a inventory
-router.post('/inventory/add',fetchItem,[
+router.post('/inventory/add',fetchItem,
+    [
     body("name","min length of the name is 3").isLength({min:3}),
     body("quantity","cant left this field empty").exists(),
     body("price","cant left this field empty").exists(),
     body("itemcode","cant left this field empty").exists(),
     body("tag","min length of the name is 3").isLength({min:3}),
     body("image","cant left this field empty").exists(),
-],async(req,res)=>{
+],
+async(req,res)=>{
     const error=validationResult(req);
     if(!error.isEmpty()){
-        res.status(400).json({error:error.array()});
+       return  res.status(400).json({error:error.array()});
     }
     try {
         const {name,quantity,price,itemcode,tag,image}=req.body;
@@ -48,14 +50,14 @@ router.post('/inventory/add',fetchItem,[
             name,quantity,price,itemcode,tag,image,seller:req.seller.id
         })
         const saveInventory=await inventory.save()
-        res.status(200).send(saveInventory);
+        return res.status(200).send(saveInventory);
     } catch (error) {
-        res.status(500).json({error:error});
+        return res.status(500).json({error:error});
     }
 })
 
 //for updating an inventory
-router.put('/inventory/update/:id',upload.single('image'),fetchItem,[
+router.put('/inventory/update/:id',fetchItem,[
     body("name","min length of the name is 3").isLength({min:3}),
     body("quantity","cant left this field empty").exists(),
     body("price","cant left this field empty").exists(),
@@ -65,34 +67,39 @@ router.put('/inventory/update/:id',upload.single('image'),fetchItem,[
 ],async(req,res)=>{
     const error=validationResult(req);
     if(!error.isEmpty()){
-        res.status(401).json({error:error.array()});
+        return res.status(401).json({error:error.array()});
     }
     try {
         const productId=req.params.id;
 
-        const {name,quantity,price,itemcode,tag}=req.body;
-
-        let image;
-        if(req.file){
-            image=req.file.path
-        }
+        const {name,quantity,price,itemcode,tag,image}=req.body;
 
         const updateProduct=await Inventory.findByIdAndUpdate(productId,{
             name:name,
             price:price,
-            image:image || req.body.image,
+            image:image,
             itemcode:itemcode,
             tag:tag,
             quantity:quantity
         })
 
-        if(!updateProduct){
-            res.status(404).json({error:"product not found"})
+        const updated={
+            name:name,
+            price:price,
+            image:image,
+            itemcode:itemcode,
+            tag:tag,
+            quantity:quantity,
+            _id:updateProduct._id
         }
 
-        res.status(201).send(updateProduct);
+        if(!updateProduct){
+            return res.status(404).json({error:"product not found"})
+        }
+
+        return res.status(201).send(updated);
     } catch (error) {
-        res.status(500).json({error:error});
+        return res.status(500).json({error:error});
     }
 })
 
@@ -105,41 +112,44 @@ router.delete('/inventory/delete/:id',fetchItem,async(req,res)=>{
         const deletedProduct=await Inventory.findByIdAndDelete(productId);
         
         if(!deletedProduct){
-            res.status(404).json({error:"Inventory not found"});
+            return res.status(404).json({error:"Inventory not found"});
         }
-        res.send(200).send("inventory deleted sucessfully");
+        return res.status(200).send("inventory deleted sucessfully");
 
     } catch (error) {
-        res.status(500).json({error:error});
+        return res.status(500).json({error:error});
     }
 
 })
 
 //for seaching the item
-router.get('/inventory/search',fetchItem,async (req,res)=>{
+router.get('/inventory/search', fetchItem, async (req, res) => {
     try {
-        const{name,minPrice,maxPrice,tag}=req.query;
+        const sellerId = req.seller.id;
+        const { name, minPrice, maxPrice, tag } = req.query;
 
-        const query={};
-        if(name){
-            query.name={$regex:name,$options:'i'};
+        const query = { seller: sellerId };
+        
+        if (name) {
+            query.name = { $regex: name, $options: 'i' };
         }
-        if(minPrice){
-            query.price={$gte:minPrice};
+        if (minPrice) {
+            query.price = { ...query.price, $gte: minPrice };
         }
-        if(maxPrice){
-            query.price={...query.price,$lte:maxPrice};
+        if (maxPrice) {
+            query.price = { ...query.price, $lte: maxPrice };
         }
-        if(tag){
-            query.tag=tag;
+        if (tag) {
+            query.tag = tag;
         }
 
-        const inventoryItem=await Inventory.find(query);
-        res.status(200).json(inventoryItem)
+        const inventoryItems = await Inventory.find(query);
+        return res.status(200).json(inventoryItems);
     } catch (error) {
-        res.status(500).json({error:error});
+        return res.status(500).json({ error: error.message });
     }
-})
+});
+
 
 // adding pagination
 router.get('/inventory',fetchItem,async(req,res)=>{
@@ -174,6 +184,36 @@ router.get('/inventory',fetchItem,async(req,res)=>{
         res.status(500).json({error:error});
     }
 })
+
+//for updating the qunatity of the inventory
+router.put('/inventory/updatequantity/:id', fetchItem, async (req, res) => {
+
+    const error=validationResult(req);
+    if(!error.isEmpty()){
+        return res.status(401).json({error:error.array()});
+    }
+
+    try {
+      const productId = req.params.id;
+      const { increment } = req.body;
+  
+      // Fetch the current quantity
+      const item = await Inventory.findById(productId);
+      if (!item) {
+        return res.status(404).send("Product not found");
+      }
+  
+      // Update the quantity
+      item.quantity += increment;
+  
+      const updatedItem = await item.save();
+  
+      return res.status(200).send(updatedItem);
+    } catch (error) {
+      return res.status(500).json({ error: error.message });
+    }
+  });
+  
 
 //adding a accounting system:
 router.get('/inventory/analytics',fetchItem,async(req,res)=>{

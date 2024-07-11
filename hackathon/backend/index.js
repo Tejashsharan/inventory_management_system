@@ -1,8 +1,12 @@
 const express =require ('express');
 const connectToMongoose=require('./db');
 const app=express();
-const port =3000;
+const cors = require('cors');
+const port =5000;
 
+app.use(cors({
+    origin: 'http://localhost:3000'
+  }));
 // app.use(cors())
 app.use(express.json());
 
@@ -18,6 +22,7 @@ app.delete('/seller/getseller',require('./routes/auth'));
 
 app.post('/inventory/add',require('./routes/store'))
 app.put('/inventory/update/:id',require('./routes/store'));
+app.put('/inventory/updatequantity/:id',require('./routes/store'));
 app.delete('/inventory/delete/:id',require('./routes/store'));
 app.get('/inventory/getinventory',require('./routes/store'));
 app.get('/inventory/search',require('./routes/store'));
