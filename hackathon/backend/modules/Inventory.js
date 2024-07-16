@@ -30,7 +30,8 @@ const inventorySchema = new Schema({
   quantity: {
     type: Number,
     required: true
-  }
+  },
+  timestamp:{type:Date,default:Date.now}
 });
 
 inventorySchema.index({ itemcode: 1, seller: 1 }, { unique: true });

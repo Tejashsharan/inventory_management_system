@@ -7,6 +7,7 @@ import Signup from './components/Signup';
 import InventoryState from './components/InventoryState';
 import { useState, useEffect } from 'react';
 import TransactionState from './components/TransactionState';
+import SpreadSheet from './components/SpreadSheet';
 
 function App() {
   const [loged, setLoged] = useState(localStorage.getItem("token"));
@@ -26,6 +27,7 @@ function App() {
             <Route path='/signup' element={<Signup />} />
             <Route path='/inventories' element={loged ? <InventoryState /> : <Login loged={loged} setLoged={setLoged} />} />
             <Route path='/transaction' element={<TransactionState />} />
+            <Route path='/spreadsheet' element={<SpreadSheet/>}></Route>
           </Routes>
         </div>
       </BrowserRouter>

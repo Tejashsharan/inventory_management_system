@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import pic from './money.jpg';
+import pic from './moneyadd.png';
 
 const AddTransaction = ({ money, setMoney, clicked, setClicked }) => {
 

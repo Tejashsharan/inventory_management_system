@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import pic from './money.jpg';
+import pic from './Screenshot (70).png';
 
 const UpdateTransaction = ({money,setMoney,updateClicked,setUpdateClicked,data,setData,id}) => {
 
@@ -93,7 +93,7 @@ const UpdateTransaction = ({money,setMoney,updateClicked,setUpdateClicked,data,s
         <div style={{ display: "flex" }}>
           <img alt="out of stock" src={pic} style={{ width: "50%" }} />
           <div style={{ display: "flex", flexDirection: "column", padding: "10px", justifyContent: "center", alignItems: "flexStart", width: "100%" }}>
-            <h1 style={{ color: 'white' }}>Add Transaction</h1>
+            <h1 style={{ color: 'white' }}>Update Transaction</h1>
 
             <label htmlFor='type'>Type</label>
             <input id='type' name='type' type='text' onChange={handleTransactionChange} value={transaction.type} style={{ marginBottom: "10px", width: "100%", paddingLeft: "15px" }} placeholder="Enter the type" />

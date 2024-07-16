@@ -35,6 +35,9 @@ const Navbar = ({ loged, setLoged }) => {
               <Link style={{ color: 'white' }} to={"/transaction"} >Transaction</Link>
             </li>}
             {loged && <li>
+              <Link style={{ color: 'white' }} to={"/spreadsheet"} >Taxes</Link>
+            </li>}
+            {loged && <li>
               <Link style={{ color: 'white' }} to={"/"} onClick={handleOnClick}>Logout</Link>
             </li>}
           </ul>
