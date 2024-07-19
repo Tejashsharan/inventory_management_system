@@ -1,10 +1,19 @@
 import React, { useState } from 'react'
+import { Link } from 'react-router-dom';
 
-const Menu = () => {
+const Menu = ({loged,setLoged}) => {
     const [open, setOpen] = useState(false);
 
     const handleOnClick = () => {
         setOpen(!open);
+    }
+    const handleLogOut=()=>{
+        localStorage.clear();
+        setLoged(false);
+    }
+    const handle=()=>{
+        handleOnClick();
+        handleLogOut();
     }
     return (
         <>
@@ -13,12 +22,16 @@ const Menu = () => {
                 <div className='bar2'></div>
                 <div className='bar3'></div>
             </div>
-            <div className='clickedMenu' style={{display:open?"block":"none"}}>
+            <div className={'clickedMenu'} style={{display:open?"block":"none"}}>
                 <ul style={{listStyle:"none"}}>
-                    <li>Home</li>
-                    <li>About Us</li>
-                    <li>Sign Up</li>
-                    <li>Login</li>
+                    {!loged && <li><Link onClick={handleOnClick} to={"/"}>Home</Link></li>}
+                    {!loged && <li><Link onClick={handleOnClick} to={"/aboutus"}>About Us</Link></li>}
+                    {!loged && <li><Link onClick={handleOnClick} to={"/signup"}>Sign Up</Link></li>}
+                    {!loged && <li><Link onClick={handleOnClick} to={"/login"}>Login</Link></li>}
+                    {loged && <li><Link onClick={handleOnClick} to={"/inventories"}>Inventories</Link></li>}
+                    {loged && <li><Link onClick={handleOnClick} to={"/transaction"}>Transaction</Link></li>}
+                    {loged && <li><Link onClick={handleOnClick} to={"/spreadsheet"}>Taxes</Link></li>}
+                    {loged && <li><Link  onClick={handle} to={"/"}>Logout</Link></li>}
                 </ul>
             </div>
         </>

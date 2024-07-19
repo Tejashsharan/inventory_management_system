@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Menu from './Menu';
 
 const Navbar = ({ loged, setLoged }) => {
 
@@ -13,32 +14,33 @@ const Navbar = ({ loged, setLoged }) => {
       <nav>
         <section className='logo'>
           <img src='https://img-s-msn-com.akamaized.net/tenant/amp/entityid/AAOoeEF.img?w=44&h=44' alt='logo' />
+          <Menu loged={loged} setLoged={setLoged}/>
         </section>
         <section className='menu'>
           <ul>
             {!loged && <li>
-              <Link style={{ color: 'white' }} to={"/"}>Home</Link>
+              <Link to={"/"}>Home</Link>
             </li>}
             {!loged && <li>
-              <Link style={{ color: 'white' }} to={"/"}>About Us</Link>
+              <Link to={"/aboutus"}>About Us</Link>
             </li>}
             {!loged && <li>
-              <Link style={{ color: 'white' }} to={"/signup"}>Sign Up</Link>
+              <Link to={"/signup"}>Sign Up</Link>
             </li>}
             {!loged && <li>
-              <Link style={{ color: 'white' }} to={"/login"}>Login</Link>
+              <Link to={"/login"}>Login</Link>
             </li>}
             {loged && <li>
-              <Link style={{ color: 'white' }} to={"/inventories"} >Inventories</Link>
+              <Link to={"/inventories"} >Inventories</Link>
             </li>}
             {loged && <li>
-              <Link style={{ color: 'white' }} to={"/transaction"} >Transaction</Link>
+              <Link to={"/transaction"} >Transaction</Link>
             </li>}
             {loged && <li>
-              <Link style={{ color: 'white' }} to={"/spreadsheet"} >Taxes</Link>
+              <Link to={"/spreadsheet"} >Taxes</Link>
             </li>}
             {loged && <li>
-              <Link style={{ color: 'white' }} to={"/"} onClick={handleOnClick}>Logout</Link>
+              <Link to={"/"} onClick={handleOnClick}>Logout</Link>
             </li>}
           </ul>
         </section>

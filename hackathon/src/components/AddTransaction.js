@@ -48,6 +48,10 @@ const AddTransaction = ({ money, setMoney, clicked, setClicked }) => {
     setproduct(newproduct);
   };
 
+  const handleOnClick=()=>{
+    setClicked(!clicked)
+  }
+
   return (
     <div style={{
       position: "fixed",
@@ -67,12 +71,28 @@ const AddTransaction = ({ money, setMoney, clicked, setClicked }) => {
         backgroundColor: "rgb(56, 95, 177 , 0.9)",
         fontWeight: "600",
         borderRadius: "10px",
-        maxWidth:"855px"
+        maxWidth:"855px",
+        overflowY:"scroll",
+        maxHeight:"620px"
       }}>
-        <div style={{ display: "flex" }}>
-          <img alt="out of stock" src={pic} style={{ width: "50%" }} />
-          <div style={{ display: "flex", flexDirection: "column", padding: "10px", justifyContent: "center", alignItems: "flexStart", width: "100%" }}>
-            <h1 style={{ color: 'white' }}>Add Transaction</h1>
+        <div  style={{ display: "flex" }}>
+          <img className='large' alt="out of stock" src={pic} style={{ width: "50%" }} />
+          <div style={{ display: "flex", flexDirection: "column", padding: "10px", justifyContent: "center", alignItems: "flexStart", width: "100%"
+          }}>
+          
+          <div style={{display:"flex",
+              alignItems:"center",
+              justifyContent:"space-between"
+            }}>
+            <h1 style={{color:'white'}}>Add Transaction ?</h1>
+            <div style={{
+              height:"28px",
+              width:"30px",
+              backgroundColor:"red",
+              padding:"2px 9px",
+              cursor:"pointer"
+            }} onClick={handleOnClick}>X</div>
+            </div>
 
             <label htmlFor='type'>Type</label>
             <input id='type' name='type' type='text' onChange={handleTransactionChange} value={transaction.type} style={{ marginBottom: "10px", width: "100%", paddingLeft: "15px" }} placeholder="Enter the type" />

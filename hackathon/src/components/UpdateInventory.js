@@ -69,6 +69,10 @@ const UpdateInventory = ({ update, setUpdate, notes, setnotes, product_id, data 
     setInventory({ ...inventory, [e.target.name]: e.target.value });
   }
 
+  const handleOnClick=()=>{
+    setUpdate(!update)
+  }
+
   return (
     <div style={{
       position: "fixed",
@@ -85,9 +89,23 @@ const UpdateInventory = ({ update, setUpdate, notes, setnotes, product_id, data 
       <form onSubmit={handleOnSubmit} style={{ color: "white", height: "auto", maxWidth:"855px",backgroundColor: "rgb(56, 95, 177 , 0.9)", fontWeight: "600" }}>
 
         <div style={{ display: "flex" }}>
-          <img alt="out of stock" src={pic} style={{ width: "50%" }} />
+          <img alt="out of stock" className='large' src={pic} style={{ width: "50%" }} />
           <div style={{ display: "flex", flexDirection: "column", padding: "10px", justifyContent: "center", alignItems: "flex-start", width: "100%" }}>
-            <h1 style={{ color: 'white' }}>Upadate Inventory?</h1>
+          
+          <div style={{display:"flex",
+              alignItems:"center",
+              justifyContent:"space-between",
+              width:"100%"
+            }}>
+            <h1 style={{color:'white'}}>Update Inventory ?</h1>
+            <div style={{
+              height:"28px",
+              width:"30px",
+              backgroundColor:"red",
+              padding:"2px 9px",
+              cursor:"pointer"
+            }} onClick={handleOnClick}>X</div>
+            </div>
 
             <label htmlFor='image'>Image</label>
             <input id='image' name='image' type='text' onChange={handleOnChange} value={inventory.image} style={{ marginBottom: "10px", width: "100%", paddingLeft: "15px" }} placeholder="Enter the URL of the image" />

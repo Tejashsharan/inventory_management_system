@@ -28,6 +28,10 @@ const AddInventory = ({clicked,setclicked,notes,setnotes}) => {
     setInventory({ ...inventory, [e.target.name]: e.target.value });
   }
 
+  const handleOnClick=()=>{
+    setclicked(!clicked)
+  }
+
   return (
     <div style={{
       position: "fixed",
@@ -45,9 +49,26 @@ const AddInventory = ({clicked,setclicked,notes,setnotes}) => {
       <form onSubmit={handleOnSubmit} style={{color:"white",height:"auto", backgroundColor:"rgb(56, 95, 177 , 0.9)" , fontWeight:"600"}
       }>
         <div style={{display:"flex"}}>
-          <img alt="out of stokes" src={pic} style={{width:"50%"}}/>
+
+          {/* /////////////////////////////// */}
+
+
+          <img className='large' alt="out of stokes" src={pic} style={{width:"50%"}}/>
           <div style={{display:"flex", flexDirection:"column",padding:"10px",justifyContent:"center",alignItems:"flexStart",width:"100%"}}>
+
+            <div style={{display:"flex",
+              alignItems:"center",
+              justifyContent:"space-between"
+            }}>
             <h1 style={{color:'white'}}>Add Inventory ?</h1>
+            <div style={{
+              height:"28px",
+              width:"30px",
+              backgroundColor:"red",
+              padding:"2px 9px",
+              cursor:"pointer"
+            }} onClick={handleOnClick}>X</div>
+            </div>
 
             <label htmlFor='image'>Image</label>
             <input id='image' name='image' type='text' onChange={handleOnChange} value={inventory.image} style={{marginBottom:"10px",width:"100%",paddingLeft:"15px"}} placeholder="Enter the url of the image"/>

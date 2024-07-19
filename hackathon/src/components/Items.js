@@ -76,8 +76,8 @@ const Items = ({ name, price, image, itemcode, tag, quantity,product_id ,index,n
     }
 
     return (
-        <div className='items-container' style={{ maxWidth: "375px", border: "2px solid green", color: "green", fontFamily: "Arial, sans-serif", margin: "auto", marginTop: "50px", borderRadius: "12px"}}>
-            <img src={image} style={{ height: "290px", width: "370px", borderRadius: "12px" }} alt='product' />
+        <div className='items-container' style={{ maxWidth: "341px", border: "2px solid green", color: "green", fontFamily: "Arial, sans-serif", margin: "auto", marginTop: "50px", borderRadius: "12px"}}>
+            <img src={image} style={{ height: "290px", width: "337px", borderRadius: "12px" }} alt='product' />
 
             <div style={{ display: 'flex', width: "100%" ,justifyContent:"space-around"}}>
                 <p style={{ height: "auto", maxWidth: "100px", margin: "10px", borderRadius: "12px", padding: "10px", backgroundColor: 'green', color: "white" }}>{toupper(tag)}</p>

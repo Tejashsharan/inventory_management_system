@@ -81,19 +81,22 @@ const InventoryState = (props) => {
 
   return (
     <>
-    <form  onSubmit={handleOnSearch} style={{
+    <form className='form' onSubmit={handleOnSearch} style={{
       display:"flex",
       flexDirection:"row",
       justifyContent:"center",
       alignItems:"center",
-      margin:"20px 5px 5px 5px",
+      margin:"0px 5px 5px 5px",
       position:"fixed",
-      zIndex:"1000",
-      width:"100%"
+      zIndex:"0",
+      backgroundColor:"white",
+      width:"100%",
+      height:"55px"
       }}>
       <input type='text' value={change} onChange={handleOnChange} placeholder='search' style={{
         paddingLeft:"10px"
-        ,height:"35px"
+        ,height:"35px",
+        width:"80%"
       }}/>
       {!searched && <img src='https://th.bing.com/th/id/OIP.aewliRTPoYpyQhGwOlCaPAHaHa?rs=1&pid=ImgDetMain' alt='search' style={{
         height:"35px",
@@ -144,8 +147,7 @@ const InventoryState = (props) => {
           position: "fixed", 
           right: "20px",
           top:"50%", 
-          cursor:'pointer',
-          zIndex:"1001"}}>
+          cursor:'pointer'}}>
         +
       </div>
       {clicked && <AddInventory notes={notes} setnotes={setNotes} clicked={clicked} setclicked={setClicked}/>}
@@ -160,7 +162,8 @@ const styles = {
     display: "grid",
     gridTemplateColumns: "repeat(auto-fill, minmax(375px, 1fr))",
     gap: "20px",
-    padding: "20px"
+    padding: "20px",
+    justifyContent:"center"
   }
 };
 

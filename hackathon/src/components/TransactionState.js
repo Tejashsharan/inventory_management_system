@@ -69,8 +69,7 @@ const TransactionState = () => {
         position: "fixed",
         right: "20px",
         top: "50%",
-        cursor: 'pointer',
-        zIndex: "1001"
+        cursor: 'pointer'
       }}>
         +
       </div>
