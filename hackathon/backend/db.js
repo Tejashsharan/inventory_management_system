@@ -1,10 +1,22 @@
-const mongoose=require('mongoose');
-main().catch(err=>console.log(err));
+const mongoose = require('mongoose');
+require('dotenv').config(); // Load .env file
 
-async function main(){
-    await mongoose.connect('mongodb://localhost:27017/')
-    .then(()=>console.log("connected"))
-    .catch((e)=>console.log(e.message))
+async function connectToMongoose() {
+  const DATABASE = process.env.DATABASE;
+  if (!DATABASE) {
+    console.error('DATABASE environment variable not set.');
+    process.exit(1);
+  }
+
+  console.log(`Connecting to database: ${DATABASE}`);
+
+  try {
+    await mongoose.connect(DATABASE, { useNewUrlParser: true, useUnifiedTopology: true });
+    console.log("Connected to MongoDB");
+  } catch (err) {
+    console.error("Failed to connect to MongoDB", err.message);
+    process.exit(1); // Exit the process with failure
+  }
 }
 
-module.exports=main;
+module.exports = connectToMongoose;

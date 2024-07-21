@@ -5,7 +5,7 @@ const bcrypt=require('bcryptjs');
 const jwt=require('jsonwebtoken');
 const fetchItem=require('../middleware/fetchItem');
 
-const jwt_secret='shhthis!sp@ssword';
+const jwt_secret=process.env.JWT_SECRET;
 //signup
 const router=express.Router();
 router.post('/seller/signup',[

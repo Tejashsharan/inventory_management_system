@@ -1,18 +1,23 @@
 const express =require ('express');
+require('dotenv').config(); 
 const connectToMongoose=require('./db');
 const app=express();
 const cors = require('cors');
-const port =5000;
+const port =process.env.PORT||5000;
 
 app.use(cors({
-    origin: 'http://localhost:3000'
+    origin: process.env.CORS_ORIGIN||'http://localhost:3000'
   }));
 // app.use(cors())
 app.use(express.json());
 
-app.get('/',(req,res)=>{
-    res.send('Hello World!');
-})
+(async () => {
+    await connectToMongoose();
+  
+    // Setup routes after the database connection is established
+    app.get('/', (req, res) => {
+      res.send('Hello World!');
+    });
 
 app.post('/seller/signup',require('./routes/auth'));
 app.post('/seller/login',require('./routes/auth'));
@@ -37,6 +42,7 @@ app.listen(port,()=>{
     console.log(`Example app listening on port ${port}`)
     
 })
+})();
 // const silent=new kitten({name:'Silence'});
 // console.log(silent.name);
 
