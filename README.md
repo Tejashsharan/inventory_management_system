@@ -1,70 +1,67 @@
-# Getting Started with Create React App
+# Inventory management system
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Description
+This project is a React-based application designed to manage transactions and inventory. Users can add, update, and view transactions, as well as calculate GST for their products using a spreadsheet interface.
 
-## Available Scripts
+## Features
+- Add and update transactions
+- View transaction history
+- Calculate GST for products using a spreadsheet interface
+- View statistics on the number of inventories added and their costs over time
 
-In the project directory, you can run:
+## Installation
+To get started with this project, follow these steps:
 
-### `npm start`
+1. Clone the repository:
+   ```sh
+   git clone https://github.com/Tejashsharan/inventory_management_system
+   cd hackathon
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+npm install
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+npm start
 
-### `npm test`
+The application will be available at http://localhost:3000.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Usage
+Adding Transactions
+Click the "+" button to open the Add Transaction form.
+Fill in the transaction details, including type, amount, and product details.
+Click "Add Product" to add multiple products to the transaction.
+Click "Submit" to save the transaction.
+Viewing Transactions
+Transactions are listed on the main page.
+Each transaction displays the date, products, amount, and type.
+Updating Transactions
+Click the edit icon next to a transaction to open the Update Transaction form.
+Modify the transaction details as needed.
+Click "Submit" to save the changes.
+Calculating GST
+Navigate to the GST Calculation section.
+Enter product details, including name, cost, CGST, SGST, and IGST.
+The total tax and payable amount will be calculated automatically.
+License
+This project is licensed under the MIT License. See the LICENSE file for more information.
 
-### `npm run build`
+Contributing
+If you would like to contribute to this project, please follow these steps:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Fork the repository.
+Create a new branch for your feature or bug fix:
+git checkout -b feature-name
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Commit your changes:
+git commit -m "Add feature-name"
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Push to your branch:
+git push origin feature-name
 
-### `npm run eject`
+Open a pull request.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Acknowledgements
+React
+react-spreadsheet
+react-router-dom
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+For any questions or feedback, please contact tejashsharan2022@gmail.com.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
